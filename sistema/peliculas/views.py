@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Pelicula
 
 # Create your views here.
 
@@ -10,7 +11,8 @@ def soporte(request):
     return render(request, 'paginas/soporte.html')
 
 def index(request):
-    return render(request, 'peliculas/index.html')
+    peliculas = Pelicula.objects.all()
+    return render(request, 'peliculas/index.html', {'peliculas': peliculas})
 
 def agregar(request):
     return render(request, 'peliculas/agregar.html')
