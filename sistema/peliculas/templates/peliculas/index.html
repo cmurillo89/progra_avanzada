@@ -20,7 +20,7 @@
             <h4 class="card-title">Listado</h4>
             
 
-            <table class="table">
+            <table class="table" id="myTable">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -44,7 +44,7 @@
                                 name=""
                                 id=""
                                 class="btn btn-outline-warning"
-                                href="{% url 'editar' %}"
+                                href="{% url 'editar' pelicula.id%}"
                                 role="button"
                                 >Editar</a
                             >
@@ -52,7 +52,7 @@
                                 name=""
                                 id=""
                                 class="btn btn-outline-danger"
-                                href="#"
+                                href="{% url 'eliminar' pelicula.id%}"
                                 role="button"
                                 >Eliminar</a
                             >
@@ -64,5 +64,13 @@
         </div>
         <div class="card-footer text-muted">Sección de pie de tarjeta</div>
     </div>
+
+    <script>
+        new DataTable('#myTable');
+        
+    </script>
+
+       
     
+
 {% endblock %}
