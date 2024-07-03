@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Pelicula
 from .forms import PeliculaForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -8,9 +10,11 @@ from .forms import PeliculaForm
 def inicio(request):
     return render(request, 'paginas/inicio.html')
 
+@login_required
 def soporte(request):
     return render(request, 'paginas/soporte.html')
 
+@login_required
 def index(request):
     peliculas = Pelicula.objects.all()
     return render(request, 'peliculas/index.html', {'peliculas': peliculas})
@@ -34,3 +38,7 @@ def eliminar(request, id):
     pelicula = Pelicula.objects.get(id=id)
     pelicula.delete()
     return redirect('index')
+
+def exit(request):
+    logout(request)
+    return redirect('inicio')

@@ -62,7 +62,13 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer text-muted">Sección de pie de tarjeta</div>
+        <div class="card-footer text-muted">
+
+            {% if request.user.is_authenticated %}
+            <h2>Hola {{ request.user.username }}</h2>
+            {% endif %}
+
+        </div>
     </div>
 
     <script>

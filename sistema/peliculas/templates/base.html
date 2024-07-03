@@ -41,6 +41,12 @@
                     >
                     <a class="nav-item nav-link" href="{% url 'index' %}">Peliculas</a>
                     <a class="nav-item nav-link" href="{% url 'soporte' %}">Soporte</a>
+                    {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'exit' %}">Salir</a>
+                    {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Ingresar</a>
+                    {% endif %}
+
                 </div>
             </nav>
             

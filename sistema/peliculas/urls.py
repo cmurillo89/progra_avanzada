@@ -12,4 +12,5 @@ urlpatterns = [
     path('agregar/', views.agregar, name='agregar'),
     path('editar/<int:id>', views.editar, name='editar'),
     path('eliminar/<int:id>', views.eliminar, name='eliminar'),
+    path('exit/', views.exit, name='exit'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
