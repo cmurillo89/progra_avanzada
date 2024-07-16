@@ -40,6 +40,7 @@
                         >Inicio <span class="visually-hidden">(current)</span></a
                     >
                     <a class="nav-item nav-link" href="{% url 'index' %}">Peliculas</a>
+                    <a class="nav-item nav-link" href="{% url 'index_cat' %}">Categorías</a>
                     <a class="nav-item nav-link" href="{% url 'soporte' %}">Soporte</a>
                     {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="{% url 'exit' %}">Salir</a>

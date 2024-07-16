@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Pelicula
-from .forms import PeliculaForm
+from .models import Pelicula, categoria
+from .forms import PeliculaForm, CategoriaForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
@@ -18,6 +18,31 @@ def soporte(request):
 def index(request):
     peliculas = Pelicula.objects.all()
     return render(request, 'peliculas/index.html', {'peliculas': peliculas})
+
+@login_required
+def index_cat(request):
+    categorias = categoria.objects.all()
+    return render(request, 'categorias/index_cat.html', {'categorias': categorias})
+
+def add_cat(request):
+    formulario = CategoriaForm(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('index_cat')
+    return render(request, 'categorias/add_cat.html', {'formulario': formulario})
+
+def edit_cat(request, id):
+    cat = categoria.objects.get(id=id)
+    formulario = CategoriaForm(request.POST or None, instance=cat)
+    if formulario.is_valid() and request.POST:
+        formulario.save()
+        return redirect('index_cat')
+    return render(request, 'categorias/edit_cat.html', {'formulario': formulario})
+
+def del_cat(request, id):
+    cat = categoria.objects.get(id=id)
+    cat.delete()
+    return redirect('index_cat')
 
 def agregar(request):
     formulario = PeliculaForm(request.POST or None, request.FILES or None)
