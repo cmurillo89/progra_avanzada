@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class categoria(models.Model):
@@ -15,6 +16,7 @@ class Pelicula(models.Model):
     categoria = models.ForeignKey('categoria', on_delete=models.CASCADE, verbose_name="Categoría")
     imagen = models.ImageField(upload_to='imagenes/', verbose_name="Imagen", null=True, blank=True)
     descripcion = models.TextField(null=True, blank=True, verbose_name="Descripción")
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario", null=True, blank=True)
 
     def __str__(self):
         fila = str(self.id) + " - " + self.titulo + " - " + self.descripcion

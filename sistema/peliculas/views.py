@@ -16,7 +16,7 @@ def soporte(request):
 
 @login_required
 def index(request):
-    peliculas = Pelicula.objects.all()
+    peliculas = Pelicula.objects.filter(usuario=request.user)
     return render(request, 'peliculas/index.html', {'peliculas': peliculas})
 
 @login_required
@@ -47,7 +47,9 @@ def del_cat(request, id):
 def agregar(request):
     formulario = PeliculaForm(request.POST or None, request.FILES or None)
     if formulario.is_valid():
-        formulario.save()
+        instancia = formulario.save(commit=False)
+        instancia.usuario = request.user
+        instancia.save()
         return redirect('index')
     return render(request, 'peliculas/agregar.html', {'formulario': formulario})
 

@@ -2,6 +2,8 @@
     {% csrf_token %}
     {% for campo in formulario %}
     <div class="form-group">
+        {% if campo.label != 'Usuario' %}
+        
         <label for="" class="form-label">{{campo.label}}</label>
         
         {% if campo.field.widget.input_type == 'file' and campo.value %}
@@ -27,6 +29,7 @@
         {% endif %}
     </div>
     <div class="col-12" help-text>{{campo.errors}}</div>
+    {% endif %}
     {% endfor %}
     
 <br>
